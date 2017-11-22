@@ -219,8 +219,7 @@ for e in range(epochs):
         d.zero_grad()
         real_label = Variable(torch.rand(100, 1)*0.5 + 0.7)
         fake_label = Variable(torch.rand(100, 1)*0.3 + 0.7)
-        d_loss = ad_criterion(a, real_label) 
-        # + ad_criterion(d(Variable(gen_fake_hr.data)), fake_label)
+        d_loss = ad_criterion(a, real_label) + ad_criterion(d(Variable(gen_fake_hr.data)), fake_label)
         d_loss.backward()
         d_optimizer.step()
 
